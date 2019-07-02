@@ -11,7 +11,7 @@ class Dashboard extends Component {
                     <div className="col s12 m6">
                         <ProjectList />
                     </div>
-                    <div classname="col s12 m5">
+                    <div className="col s12 m5">
                         <Notifications />
                     </div>
                 </div>
