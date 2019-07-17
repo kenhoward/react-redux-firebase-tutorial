@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
+import { createProject } from '../../Store/Actions/projectActions';
 
 export class CreateProject extends Component {
     state = {
@@ -7,12 +9,13 @@ export class CreateProject extends Component {
     }
 
     handleChange = (e) => {
-        this.setState({ [e.target.id]: e.target.value }) //! grabs the value from the id from the below JSX
+        this.setState({ [e.target.id]: e.target.value }) 
+        //! grabs the value from the id from the below JSX
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log('this.state', this.state);
+        this.props.createProject(this.state)
     }
 
     render() {
@@ -37,4 +40,14 @@ export class CreateProject extends Component {
     }
 }
 
-export default CreateProject
+const mapDispatchToProps = (dispact) => {
+    return {
+        createProject: (project) => dispact(createProject(project)) 
+        // handleSubmit is calling this that goes to projectActions,
+        // which will dispatch the actual action
+    }
+}
+
+export default connect(null, mapDispatchToProps)(CreateProject) 
+// null: required first parameter for the connect function which requires mapStateToProps,
+// but we don't have that so we don't need it.
